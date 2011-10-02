@@ -104,6 +104,10 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
         [self.dgkvo_blockObservers addObject:newBlocksObserver];
     }
     
+#if !__has_feature(objc_arc)
+    [newBlocksObserver release];
+#endif
+    
     return newBlocksObserver;
 }
 
