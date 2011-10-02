@@ -8,15 +8,26 @@
 
 #import "NSObject+DGKVOBlocks.h"
 
+NSString *DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
+
 @interface DGKVOBlocksObserver : NSObject 
 
-//@property (nonatomic, copy) 
+@property (nonatomic, copy) DGKVOObserverBlock block;
 
 @end
 
 @implementation DGKVOBlocksObserver
 
-<#methods#>
+@synthesize block = _block;
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
+{
+    if (context == &DGKVOBlocksObservationContext) {
+        self.block(change);
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 @end
 
