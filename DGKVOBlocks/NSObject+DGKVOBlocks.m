@@ -57,7 +57,15 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
     if (context == &DGKVOBlocksObservationContext) {
-        self.block(change);
+        if (self.queue == nil) {
+            self.block(change);
+            return;
+        }
+        
+        [self.queue addOperationWithBlock: ^ {
+            self.block(change);
+        }];
+        
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
