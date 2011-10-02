@@ -40,11 +40,12 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 //***************************************************************************
 
-@interface DGKVOBlocksObserver : NSObject 
+@interface DGKVOBlocksObserver : NSObject <DGKVOBlocksObserver>
 
 @property (copy) DGKVOObserverBlock block;
 @property (copy) NSString *keyPath;
 @property (retain) NSOperationQueue *queue;
+@property (assign) id observingObject;
 
 @end
 
@@ -53,22 +54,27 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 @synthesize block = _block;
 @synthesize keyPath = _keyPath;
 @synthesize queue = _queue;
+@synthesize observingObject = _observingObject;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
     if (context == &DGKVOBlocksObservationContext) {
         if (self.queue == nil) {
-            self.block(change);
+            self.block(self, change);
             return;
         }
         
         [self.queue addOperationWithBlock: ^ {
-            self.block(change);
+            self.block(self, change);
         }];
         
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+- (void)stopObserving {
+	[self.observingObject dgkvo_removeObserverWithIdentifier:self];
 }
 
 @end
@@ -116,6 +122,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     newBlocksObserver.block = block;
     newBlocksObserver.keyPath = keyPath;
     newBlocksObserver.queue = queue;
+	newBlocksObserver.observingObject = self;
     
     [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
     
