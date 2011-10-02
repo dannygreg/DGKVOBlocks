@@ -13,6 +13,7 @@
 		30C994621438716C00966C25 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 30C994601438716C00966C25 /* Credits.rtf */; };
 		30C994651438716C00966C25 /* DGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C994641438716C00966C25 /* DGAppDelegate.m */; };
 		30C994681438716D00966C25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30C994661438716D00966C25 /* MainMenu.xib */; };
+		30C9947014388A0C00966C25 /* NSObject+DGKVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9946F14388A0C00966C25 /* NSObject+DGKVOBlocks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +22,16 @@
 		30C994541438716C00966C25 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		30C994551438716C00966C25 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		30C994561438716C00966C25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		30C994591438716C00966C25 /* DGKVOBlocks-Info.plist */ = {isa = PBXFileReference; path = "DGKVOBlocks-Info.plist"; sourceTree = "<group>"; };
+		30C994591438716C00966C25 /* DGKVOBlocks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DGKVOBlocks-Info.plist"; sourceTree = "<group>"; };
 		30C9945B1438716C00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30C9945D1438716C00966C25 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		30C9945F1438716C00966C25 /* DGKVOBlocks-Prefix.pch */ = {isa = PBXFileReference; path = "DGKVOBlocks-Prefix.pch"; sourceTree = "<group>"; };
+		30C9945F1438716C00966C25 /* DGKVOBlocks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DGKVOBlocks-Prefix.pch"; sourceTree = "<group>"; };
 		30C994611438716C00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		30C994631438716C00966C25 /* DGAppDelegate.h */ = {isa = PBXFileReference; path = DGAppDelegate.h; sourceTree = "<group>"; };
+		30C994631438716C00966C25 /* DGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGAppDelegate.h; sourceTree = "<group>"; };
 		30C994641438716C00966C25 /* DGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGAppDelegate.m; sourceTree = "<group>"; };
 		30C994671438716D00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		30C9946E14388A0C00966C25 /* NSObject+DGKVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DGKVOBlocks.h"; sourceTree = "<group>"; };
+		30C9946F14388A0C00966C25 /* NSObject+DGKVOBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DGKVOBlocks.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				30C994641438716C00966C25 /* DGAppDelegate.m */,
 				30C994661438716D00966C25 /* MainMenu.xib */,
 				30C994581438716C00966C25 /* Supporting Files */,
+				30C9946E14388A0C00966C25 /* NSObject+DGKVOBlocks.h */,
+				30C9946F14388A0C00966C25 /* NSObject+DGKVOBlocks.m */,
 			);
 			path = DGKVOBlocks;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			files = (
 				30C9945E1438716C00966C25 /* main.m in Sources */,
 				30C994651438716C00966C25 /* DGAppDelegate.m in Sources */,
+				30C9947014388A0C00966C25 /* NSObject+DGKVOBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
