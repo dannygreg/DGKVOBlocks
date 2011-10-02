@@ -17,7 +17,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     
-	id identifier = [self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew block:^(NSDictionary *change) {
+	id identifier = [self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew queue:nil block:^(NSDictionary *change) {
 		NSLog(@"%@", change);
 	}];
 	
