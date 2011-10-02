@@ -60,17 +60,17 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @interface NSObject (DGKVOBlocksProperties) 
 
-@property (nonatomic, readonly) NSMutableDictionary *dgkvo_blockObservers;
+@property (nonatomic, readonly) NSMutableArray *dgkvo_blockObservers;
 
 @end
 
 @implementation NSObject (DGKVOBlocksProperties) 
 
-- (NSMutableDictionary *)dgkvo_blockObservers
+- (NSMutableArray *)dgkvo_blockObservers
 {
-    NSMutableDictionary *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
+    NSMutableArray *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
     if (setDict == nil) {
-        NSMutableDictionary *newSetDict = [NSMutableDictionary dictionary];
+        NSMutableArray *newSetDict = [NSMutableArray array];
         objc_setAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
         
         return newSetDict;
@@ -94,16 +94,15 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     newBlocksObserver.block = block;
     
     [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
-    NSObject *newKey = [[NSProcessInfo processInfo] globallyUniqueString];
-    [self.dgkvo_blockObservers setObject:newBlocksObserver forKey:newKey];
+    [self.dgkvo_blockObservers addObject:newBlocksObserver];
     
-    return newKey;
+    return newBlocksObserver;
 }
 
 - (void)dgkvo_removeObserverWithIdentifier:(id)identifier
 {
     //Now in ARC and GC just removing this reference should be enough to kill the observation
-    [self.dgkvo_blockObservers removeObjectForKey:identifier];
+    [self.dgkvo_blockObservers removeObject:identifier];
 }
 
 @end
