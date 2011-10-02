@@ -113,7 +113,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     [self removeObserver:identifier forKeyPath:[identifier keyPath]];
     
     @synchronized (self.dgkvo_blockObservers) {
-        [self.dgkvo_blockObservers removeObject:identifier];
+        [self.dgkvo_blockObservers removeObjectIdenticalTo:identifier];
     }
 }
 
