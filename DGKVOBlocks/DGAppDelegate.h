@@ -11,5 +11,6 @@
 @interface DGAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (strong) NSString *string;
 
 @end

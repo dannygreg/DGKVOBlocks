@@ -7,14 +7,24 @@
 //
 
 #import "DGAppDelegate.h"
+#import "NSObject+DGKVOBlocks.h"
 
 @implementation DGAppDelegate
 
 @synthesize window = _window;
+@synthesize string;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    
+	[self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew block:^(NSDictionary *change) {
+		NSLog(@"%@", change);
+	}];
+	
+	
+	self.string = @"ONE";
+	self.string = @"TWO";
+	self.string = @"THREE";
 }
 
 @end
