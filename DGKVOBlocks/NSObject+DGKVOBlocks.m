@@ -71,7 +71,13 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 - (NSMutableArray *)dgkvo_blockObservers
 {
     @synchronized (self) {
+        
+#if __has_feature(objc_arc)
         NSMutableArray *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
+#else
+        NSMutableArray *setDict = objc_getAssociatedObject(self, DGKVOBlocksObserversAssociatedObjectsKey);
+#endif
+
         if (setDict == nil) {
             NSMutableArray *newSetDict = [NSMutableArray array];
             objc_setAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
