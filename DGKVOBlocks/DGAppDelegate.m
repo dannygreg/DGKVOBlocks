@@ -51,7 +51,7 @@
 	self.string = @"TWO";
 	self.string = @"THREE";
 	
-	[self dgkvo_removeObserverWithIdentifier:stringObserver];
+	[stringObserver stopObserving];
     
     self.string = @"This should not appear.";
     
