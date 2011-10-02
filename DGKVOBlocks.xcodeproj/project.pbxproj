@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30C994521438716C00966C25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C994511438716C00966C25 /* Cocoa.framework */; };
+		30C9945C1438716C00966C25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30C9945A1438716C00966C25 /* InfoPlist.strings */; };
+		30C9945E1438716C00966C25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9945D1438716C00966C25 /* main.m */; };
+		30C994621438716C00966C25 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 30C994601438716C00966C25 /* Credits.rtf */; };
+		30C994651438716C00966C25 /* DGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C994641438716C00966C25 /* DGAppDelegate.m */; };
+		30C994681438716D00966C25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30C994661438716D00966C25 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		30C9944D1438716C00966C25 /* DGKVOBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGKVOBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30C994511438716C00966C25 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		30C994541438716C00966C25 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		30C994551438716C00966C25 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		30C994561438716C00966C25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		30C994591438716C00966C25 /* DGKVOBlocks-Info.plist */ = {isa = PBXFileReference; path = "DGKVOBlocks-Info.plist"; sourceTree = "<group>"; };
+		30C9945B1438716C00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30C9945D1438716C00966C25 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		30C9945F1438716C00966C25 /* DGKVOBlocks-Prefix.pch */ = {isa = PBXFileReference; path = "DGKVOBlocks-Prefix.pch"; sourceTree = "<group>"; };
+		30C994611438716C00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		30C994631438716C00966C25 /* DGAppDelegate.h */ = {isa = PBXFileReference; path = DGAppDelegate.h; sourceTree = "<group>"; };
+		30C994641438716C00966C25 /* DGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGAppDelegate.m; sourceTree = "<group>"; };
+		30C994671438716D00966C25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30C9944A1438716C00966C25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30C994521438716C00966C25 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30C994421438716C00966C25 = {
+			isa = PBXGroup;
+			children = (
+				30C994571438716C00966C25 /* DGKVOBlocks */,
+				30C994501438716C00966C25 /* Frameworks */,
+				30C9944E1438716C00966C25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30C9944E1438716C00966C25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30C9944D1438716C00966C25 /* DGKVOBlocks.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30C994501438716C00966C25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30C994511438716C00966C25 /* Cocoa.framework */,
+				30C994531438716C00966C25 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30C994531438716C00966C25 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30C994541438716C00966C25 /* AppKit.framework */,
+				30C994551438716C00966C25 /* CoreData.framework */,
+				30C994561438716C00966C25 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		30C994571438716C00966C25 /* DGKVOBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				30C994631438716C00966C25 /* DGAppDelegate.h */,
+				30C994641438716C00966C25 /* DGAppDelegate.m */,
+				30C994661438716D00966C25 /* MainMenu.xib */,
+				30C994581438716C00966C25 /* Supporting Files */,
+			);
+			path = DGKVOBlocks;
+			sourceTree = "<group>";
+		};
+		30C994581438716C00966C25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30C994591438716C00966C25 /* DGKVOBlocks-Info.plist */,
+				30C9945A1438716C00966C25 /* InfoPlist.strings */,
+				30C9945D1438716C00966C25 /* main.m */,
+				30C9945F1438716C00966C25 /* DGKVOBlocks-Prefix.pch */,
+				30C994601438716C00966C25 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30C9944C1438716C00966C25 /* DGKVOBlocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30C9946B1438716D00966C25 /* Build configuration list for PBXNativeTarget "DGKVOBlocks" */;
+			buildPhases = (
+				30C994491438716C00966C25 /* Sources */,
+				30C9944A1438716C00966C25 /* Frameworks */,
+				30C9944B1438716C00966C25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DGKVOBlocks;
+			productName = DGKVOBlocks;
+			productReference = 30C9944D1438716C00966C25 /* DGKVOBlocks.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30C994441438716C00966C25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "No Thirst Software";
+			};
+			buildConfigurationList = 30C994471438716C00966C25 /* Build configuration list for PBXProject "DGKVOBlocks" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30C994421438716C00966C25;
+			productRefGroup = 30C9944E1438716C00966C25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30C9944C1438716C00966C25 /* DGKVOBlocks */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30C9944B1438716C00966C25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30C9945C1438716C00966C25 /* InfoPlist.strings in Resources */,
+				30C994621438716C00966C25 /* Credits.rtf in Resources */,
+				30C994681438716D00966C25 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30C994491438716C00966C25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30C9945E1438716C00966C25 /* main.m in Sources */,
+				30C994651438716C00966C25 /* DGAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		30C9945A1438716C00966C25 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30C9945B1438716C00966C25 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		30C994601438716C00966C25 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30C994611438716C00966C25 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		30C994661438716D00966C25 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30C994671438716D00966C25 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		30C994691438716D00966C25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		30C9946A1438716D00966C25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		30C9946C1438716D00966C25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DGKVOBlocks/DGKVOBlocks-Prefix.pch";
+				INFOPLIST_FILE = "DGKVOBlocks/DGKVOBlocks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		30C9946D1438716D00966C25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DGKVOBlocks/DGKVOBlocks-Prefix.pch";
+				INFOPLIST_FILE = "DGKVOBlocks/DGKVOBlocks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30C994471438716C00966C25 /* Build configuration list for PBXProject "DGKVOBlocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30C994691438716D00966C25 /* Debug */,
+				30C9946A1438716D00966C25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30C9946B1438716D00966C25 /* Build configuration list for PBXNativeTarget "DGKVOBlocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30C9946C1438716D00966C25 /* Debug */,
+				30C9946D1438716D00966C25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30C994441438716C00966C25 /* Project object */;
+}
