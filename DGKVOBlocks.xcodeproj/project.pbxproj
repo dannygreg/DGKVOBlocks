@@ -257,6 +257,7 @@
 		30C9946C1438716D00966C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DGKVOBlocks/DGKVOBlocks-Prefix.pch";
 				INFOPLIST_FILE = "DGKVOBlocks/DGKVOBlocks-Info.plist";
@@ -268,6 +269,7 @@
 		30C9946D1438716D00966C25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DGKVOBlocks/DGKVOBlocks-Prefix.pch";
 				INFOPLIST_FILE = "DGKVOBlocks/DGKVOBlocks-Info.plist";
@@ -295,6 +297,7 @@
 				30C9946D1438716D00966C25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

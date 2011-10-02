@@ -33,6 +33,7 @@
 NSString *DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
 
 NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserversAssociatedObjectsKey";
+
 #if __has_feature(objc_arc)
 #define DGKVOBlocksObserversAssociatedObjectsKey (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey
 #endif
