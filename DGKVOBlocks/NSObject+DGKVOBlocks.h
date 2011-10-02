@@ -26,9 +26,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^DGKVOObserverBlock)(NSDictionary *change);
-
 @protocol DGKVOBlocksObserver;
+
+typedef void (^DGKVOObserverBlock)(id<DGKVOBlocksObserver> observer, NSDictionary *change);
 
 @interface NSObject (DGKVOBlocks)
 

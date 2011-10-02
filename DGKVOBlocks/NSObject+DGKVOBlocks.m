@@ -60,12 +60,12 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 {
     if (context == &DGKVOBlocksObservationContext) {
         if (self.queue == nil) {
-            self.block(change);
+            self.block(self, change);
             return;
         }
         
         [self.queue addOperationWithBlock: ^ {
-            self.block(change);
+            self.block(self, change);
         }];
         
     } else {
