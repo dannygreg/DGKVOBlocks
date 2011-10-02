@@ -8,11 +8,18 @@
 
 #import "NSObject+DGKVOBlocks.h"
 
+#import <objc/runtime.h>
+
+//***************************************************************************
+
 NSString *DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
+NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserversAssociatedObjectsKey";
+
+//***************************************************************************
 
 @interface DGKVOBlocksObserver : NSObject 
 
-@property (nonatomic, copy) DGKVOObserverBlock block;
+@property (copy) DGKVOObserverBlock block;
 
 @end
 
@@ -31,6 +38,53 @@ NSString *DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
 
 @end
 
+//***************************************************************************
+
+@interface NSObject (DGKVOBlocksProperties) 
+
+@property (nonatomic, readonly) NSMutableDictionary *dgkvo_blockObservers;
+
+@end
+
+@implementation NSObject (DGKVOBlocksProperties) 
+
+- (NSMutableDictionary *)dgkvo_blockObservers
+{
+    NSMutableDictionary *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
+    if (setDict == nil) {
+        NSMutableDictionary *newSetDict = [NSMutableDictionary dictionary];
+        objc_setAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
+        
+        return newSetDict;
+    }
+    
+    return setDict;
+}
+
+@end
+
+//***************************************************************************
+
 @implementation NSObject (DGKVOBlocks)
+
+- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(DGKVOObserverBlock)block
+{
+    if (block == nil)
+        return nil;
+    
+    DGKVOBlocksObserver *newBlocksObserver = [[DGKVOBlocksObserver alloc] init];
+    newBlocksObserver.block = block;
+    
+    [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
+    NSObject *newKey = [[NSProcessInfo processInfo] globallyUniqueString];
+    [self.dgkvo_blockObservers setObject:newBlocksObserver forKey:newKey];
+    
+    return newKey;
+}
+
+- (void)dgkvo_removeObserverWithIdentifier:(id)identifier
+{
+    
+}
 
 @end
