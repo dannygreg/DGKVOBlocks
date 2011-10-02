@@ -12,5 +12,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, copy) NSString *string;
+@property (weak) IBOutlet NSTextField *fibonacciField;
+@property (assign) NSUInteger number;
 
 @end
