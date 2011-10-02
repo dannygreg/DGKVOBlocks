@@ -36,7 +36,7 @@
 }
 
 - (void)dealloc {
-    [self dgkvo_removeObserver:numberObserver];
+    [self dgkvo_removeObserverWithIdentifier:numberObserver];
 }
 
 
@@ -51,7 +51,7 @@
 	self.string = @"TWO";
 	self.string = @"THREE";
 	
-	[self dgkvo_removeObserver:stringObserver];
+	[self dgkvo_removeObserverWithIdentifier:stringObserver];
     
     self.string = @"This should not appear.";
     
