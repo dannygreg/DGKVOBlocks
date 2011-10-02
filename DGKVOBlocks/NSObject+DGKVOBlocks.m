@@ -62,7 +62,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @interface NSObject (DGKVOBlocksProperties) 
 
-@property (nonatomic, readonly) NSMutableArray *dgkvo_blockObservers;
+@property (readonly) NSMutableArray *dgkvo_blockObservers;
 
 @end
 
@@ -70,15 +70,17 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 - (NSMutableArray *)dgkvo_blockObservers
 {
-    NSMutableArray *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
-    if (setDict == nil) {
-        NSMutableArray *newSetDict = [NSMutableArray array];
-        objc_setAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
+    @synchronized (self) {
+        NSMutableArray *setDict = objc_getAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey);
+        if (setDict == nil) {
+            NSMutableArray *newSetDict = [NSMutableArray array];
+            objc_setAssociatedObject(self, (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
+            
+            return newSetDict;
+        }
         
-        return newSetDict;
+        return setDict; 
     }
-    
-    return setDict;
 }
 
 @end
@@ -97,7 +99,10 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     newBlocksObserver.keyPath = keyPath;
     
     [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
-    [self.dgkvo_blockObservers addObject:newBlocksObserver];
+    
+    @synchronized (self.dgkvo_blockObservers) {
+        [self.dgkvo_blockObservers addObject:newBlocksObserver];
+    }
     
     return newBlocksObserver;
 }
@@ -106,7 +111,10 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 {
     //Now in ARC and GC just removing this reference should be enough to kill the observation
     [self removeObserver:identifier forKeyPath:[identifier keyPath]];
-    [self.dgkvo_blockObservers removeObject:identifier];
+    
+    @synchronized (self.dgkvo_blockObservers) {
+        [self.dgkvo_blockObservers removeObject:identifier];
+    }
 }
 
 @end
