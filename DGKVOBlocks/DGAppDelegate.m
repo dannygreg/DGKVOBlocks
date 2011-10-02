@@ -26,6 +26,8 @@
 	self.string = @"THREE";
 	
 	[self dgkvo_removeObserverWithIdentifier:identifier];
+    
+    self.string = @"This should not appear.";
 }
 
 @end

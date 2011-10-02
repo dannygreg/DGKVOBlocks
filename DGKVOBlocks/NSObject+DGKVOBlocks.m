@@ -38,12 +38,14 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 @interface DGKVOBlocksObserver : NSObject 
 
 @property (copy) DGKVOObserverBlock block;
+@property (copy) NSString *keyPath;
 
 @end
 
 @implementation DGKVOBlocksObserver
 
 @synthesize block = _block;
+@synthesize keyPath = _keyPath;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
@@ -92,6 +94,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     
     DGKVOBlocksObserver *newBlocksObserver = [[DGKVOBlocksObserver alloc] init];
     newBlocksObserver.block = block;
+    newBlocksObserver.keyPath = keyPath;
     
     [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
     [self.dgkvo_blockObservers addObject:newBlocksObserver];
@@ -102,6 +105,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 - (void)dgkvo_removeObserverWithIdentifier:(id)identifier
 {
     //Now in ARC and GC just removing this reference should be enough to kill the observation
+    [self removeObserver:identifier forKeyPath:[identifier keyPath]];
     [self.dgkvo_blockObservers removeObject:identifier];
 }
 
