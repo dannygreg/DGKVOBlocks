@@ -42,9 +42,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    number = 1;
-	
-    stringObserver = [self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew block:^(NSDictionary *change) {
+    
+	stringObserver = [self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew queue:nil block:^(NSDictionary *change) {
 		NSLog(@"%@", change);
 	}];
 	
@@ -56,10 +55,11 @@
     
     self.string = @"This should not appear.";
     
-    numberObserver = [self dgkvo_addObserverForKeyPath:@"number" options:NSKeyValueObservingOptionNew block:^(NSDictionary *change) {
+    // Use this with a nil queue to see the main thread blocking.
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    numberObserver = [self dgkvo_addObserverForKeyPath:@"number" options:NSKeyValueObservingOptionNew queue:queue block:^(NSDictionary *change) {
         NSLog(@"%@", change);
         self.fibonacciField.integerValue = [self fibonacciNumber:number];
-        
 	}];
     
 }

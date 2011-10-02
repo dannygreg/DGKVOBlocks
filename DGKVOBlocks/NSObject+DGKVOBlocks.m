@@ -44,6 +44,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @property (copy) DGKVOObserverBlock block;
 @property (copy) NSString *keyPath;
+@property (retain) NSOperationQueue *queue;
 
 @end
 
@@ -51,11 +52,20 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @synthesize block = _block;
 @synthesize keyPath = _keyPath;
+@synthesize queue = _queue;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
     if (context == &DGKVOBlocksObservationContext) {
-        self.block(change);
+        if (self.queue == nil) {
+            self.block(change);
+            return;
+        }
+        
+        [self.queue addOperationWithBlock: ^ {
+            self.block(change);
+        }];
+        
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -97,7 +107,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @implementation NSObject (DGKVOBlocks)
 
-- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(DGKVOObserverBlock)block
+- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue block:(DGKVOObserverBlock)block
 {
     if (block == nil)
         return nil;
@@ -105,6 +115,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     DGKVOBlocksObserver *newBlocksObserver = [[DGKVOBlocksObserver alloc] init];
     newBlocksObserver.block = block;
     newBlocksObserver.keyPath = keyPath;
+    newBlocksObserver.queue = queue;
     
     [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
     
