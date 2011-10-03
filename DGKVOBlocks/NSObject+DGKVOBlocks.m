@@ -143,7 +143,6 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 - (void)dgkvo_removeObserver:(id)identifier
 {
-    //Now in ARC and GC just removing this reference should be enough to kill the observation
     [self removeObserver:identifier forKeyPath:[identifier keyPath]];
     
     @synchronized (self.dgkvo_blockObservers) {
