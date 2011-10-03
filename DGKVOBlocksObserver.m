@@ -30,11 +30,17 @@
 
 static NSString *const DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
 
+#if __has_feature(objc_arc)
+#define DGKVOBlocksObservationContext ((__bridge void *)DGKVOBlocksObservationContext)
+#endif
+
 //***************************************************************************
 
 @implementation DGKVOBlocksObserver
-
-@synthesize queue = _queue, block = _block;
+{
+    NSOperationQueue *_queue;
+    DGKVOObserverBlock _block;
+}
 
 + (id)observerWithQueue:(NSOperationQueue *)queue block:(DGKVOObserverBlock)block
 {
@@ -77,6 +83,16 @@ static NSString *const DGKVOBlocksObservationContext = @"DGKVOBlocksObservationC
 - (void *)context
 {
     return DGKVOBlocksObservationContext;
+}
+
+- (NSOperationQueue *)queue
+{
+    return _queue;
+}
+
+- (DGKVOObserverBlock)block
+{
+    return _block;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
