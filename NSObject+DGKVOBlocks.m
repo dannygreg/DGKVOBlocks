@@ -73,8 +73,9 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
             return;
         }
         
+        NSDictionary *copiedChange = [change copy];
         [self.queue addOperationWithBlock: ^ {
-            self.block(change);
+            self.block(copiedChange);
         }];
         
     } else {
