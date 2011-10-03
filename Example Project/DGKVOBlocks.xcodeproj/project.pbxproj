@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CF926B9143A3AAA006BD46C /* DGKVOBlocksObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF926B8143A3AAA006BD46C /* DGKVOBlocksObserver.m */; };
 		308679161439E8EF004A54A0 /* NSObject+DGKVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 308679151439E8EF004A54A0 /* NSObject+DGKVOBlocks.m */; };
 		30C994521438716C00966C25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C994511438716C00966C25 /* Cocoa.framework */; };
 		30C9945C1438716C00966C25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30C9945A1438716C00966C25 /* InfoPlist.strings */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CF926B7143A3AAA006BD46C /* DGKVOBlocksObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DGKVOBlocksObserver.h; path = ../../DGKVOBlocksObserver.h; sourceTree = "<group>"; };
+		1CF926B8143A3AAA006BD46C /* DGKVOBlocksObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DGKVOBlocksObserver.m; path = ../../DGKVOBlocksObserver.m; sourceTree = "<group>"; };
 		308679141439E8EF004A54A0 /* NSObject+DGKVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DGKVOBlocks.h"; path = "../../NSObject+DGKVOBlocks.h"; sourceTree = "<group>"; };
 		308679151439E8EF004A54A0 /* NSObject+DGKVOBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DGKVOBlocks.m"; path = "../../NSObject+DGKVOBlocks.m"; sourceTree = "<group>"; };
 		30C9944D1438716C00966C25 /* DGKVOBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGKVOBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +99,8 @@
 		30C994571438716C00966C25 /* DGKVOBlocks */ = {
 			isa = PBXGroup;
 			children = (
+				1CF926B7143A3AAA006BD46C /* DGKVOBlocksObserver.h */,
+				1CF926B8143A3AAA006BD46C /* DGKVOBlocksObserver.m */,
 				308679141439E8EF004A54A0 /* NSObject+DGKVOBlocks.h */,
 				308679151439E8EF004A54A0 /* NSObject+DGKVOBlocks.m */,
 				308679131439E8D5004A54A0 /* Example */,
@@ -182,6 +187,7 @@
 				30C9945E1438716C00966C25 /* main.m in Sources */,
 				30C994651438716C00966C25 /* DGAppDelegate.m in Sources */,
 				308679161439E8EF004A54A0 /* NSObject+DGKVOBlocks.m in Sources */,
+				1CF926B9143A3AAA006BD46C /* DGKVOBlocksObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

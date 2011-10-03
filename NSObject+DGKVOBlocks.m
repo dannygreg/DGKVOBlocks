@@ -24,96 +24,35 @@
 
 //*******************************************************************************
 
-#import "NSObject+DGKVOBlocks.h"
-
 #import <objc/runtime.h>
 
-//***************************************************************************
-
-NSString *DGKVOBlocksObservationContext = @"DGKVOBlocksObservationContext";
-
-NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserversAssociatedObjectsKey";
-
-#if __has_feature(objc_arc)
-#define DGKVOBlocksObserversAssociatedObjectsKey (__bridge const void *)DGKVOBlocksObserversAssociatedObjectsKey
-#endif
+#import "NSObject+DGKVOBlocks.h"
 
 //***************************************************************************
 
-@interface DGKVOBlocksObserver : NSObject 
+static NSString *const DGKVOBlocksBlockObserversKey = @"DGKVOBlocksBlockObserversKey";
+static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
 
-@property (copy) DGKVOObserverBlock block;
-@property (copy) NSString *keyPath;
-@property (retain) NSOperationQueue *queue;
+@interface NSObject (DGKVOBlocksProperties)
 
-@end
-
-@implementation DGKVOBlocksObserver
-
-@synthesize block = _block;
-@synthesize keyPath = _keyPath;
-@synthesize queue = _queue;
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-    [_keyPath release];
-    [_queue release];
-    [_block release];
-    
-    [super dealloc];
-}
-#endif
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
-{
-    if (context == &DGKVOBlocksObservationContext) {
-        if (self.queue == nil) {
-            self.block(change);
-            return;
-        }
-        
-        NSDictionary *copiedChange = [change copy];
-        [self.queue addOperationWithBlock: ^ {
-            self.block(copiedChange);
-        }];
-        
-#if !__has_feature(objc_arc)
-        [copiedChange release];
-#endif
-        
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-@end
-
-//***************************************************************************
-
-@interface NSObject (DGKVOBlocksProperties) 
-
-@property (readonly) NSMutableArray *dgkvo_blockObservers;
+@property (readonly) NSMutableSet *dgkvo_blockObservers;
 
 @end
 
 @implementation NSObject (DGKVOBlocksProperties) 
 
-- (NSMutableArray *)dgkvo_blockObservers
+- (NSMutableSet *)dgkvo_blockObservers
 {
     @synchronized (self) {
         
-       NSMutableArray *setDict = objc_getAssociatedObject(self, DGKVOBlocksObserversAssociatedObjectsKey);
+        NSMutableSet *set = objc_getAssociatedObject(self, DGKVOBlocksBlockObserversKey);
 
-        if (setDict == nil) {
-            NSMutableArray *newSetDict = [NSMutableArray array];
-            
-            objc_setAssociatedObject(self, DGKVOBlocksObserversAssociatedObjectsKey, newSetDict, OBJC_ASSOCIATION_RETAIN);
-            
-            return newSetDict;
+        if (set == nil) {
+            set = [NSMutableArray array];
+            objc_setAssociatedObject(self, DGKVOBlocksBlockObserversKey, set, OBJC_ASSOCIATION_RETAIN);
         }
         
-        return setDict; 
+        return set;
     }
 }
 
@@ -127,30 +66,30 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 {
     NSAssert(block != nil, @"You cannot add a block observer without a block.");
     
-    DGKVOBlocksObserver *newBlocksObserver = [[DGKVOBlocksObserver alloc] init];
-    newBlocksObserver.block = block;
-    newBlocksObserver.keyPath = keyPath;
-    newBlocksObserver.queue = queue;
-    
-    [self addObserver:newBlocksObserver forKeyPath:keyPath options:options context:&DGKVOBlocksObservationContext];
+    DGKVOBlocksObserver *observer = [[DGKVOBlocksObserver alloc] initWithQueue:queue block:block];
+
+    objc_setAssociatedObject(observer, DGKVOBlocksKeyPathKey, keyPath, OBJC_ASSOCIATION_COPY);
+
+    [self addObserver:observer forKeyPath:keyPath options:options context:DGKVOBlocksObservationContext];
     
     @synchronized (self.dgkvo_blockObservers) {
-        [self.dgkvo_blockObservers addObject:newBlocksObserver];
+        [self.dgkvo_blockObservers addObject:observer];
     }
     
 #if !__has_feature(objc_arc)
-    [newBlocksObserver release];
+    [observer release];
 #endif
     
-    return newBlocksObserver;
+    return observer;
 }
 
-- (void)dgkvo_removeObserverWithIdentifier:(id)identifier
+- (void)dgkvo_removeObserver:(id)observer
 {
-    [self removeObserver:identifier forKeyPath:[identifier keyPath]];
+    NSString *keyPath = objc_getAssociatedObject(observer, DGKVOBlocksKeyPathKey);
+    [self removeObserver:observer forKeyPath:keyPath];
     
     @synchronized (self.dgkvo_blockObservers) {
-        [self.dgkvo_blockObservers removeObjectIdenticalTo:identifier];
+        [self.dgkvo_blockObservers removeObject:observer];
     }
 }
 
