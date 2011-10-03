@@ -9,11 +9,7 @@
 #import "DGAppDelegate.h"
 #import "NSObject+DGKVOBlocks.h"
 
-@interface DGAppDelegate () {
-@private
-    id stringObserver;
-    id numberObserver;
-}
+@interface DGAppDelegate ()
 
 - (NSUInteger)fibonacciNumber:(NSUInteger)aNumber;
 @end
