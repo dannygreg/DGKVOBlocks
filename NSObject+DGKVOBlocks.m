@@ -78,6 +78,10 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
             self.block(copiedChange);
         }];
         
+#if !__has_feature(objc_arc)
+        [copiedChange release];
+#endif
+        
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
