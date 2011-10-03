@@ -26,19 +26,17 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DGKVOBlocksObserver;
+@class DGKVOBlocksObserver;
 
-typedef void (^DGKVOObserverBlock)(id<DGKVOBlocksObserver> observer, NSDictionary *change);
+typedef void (^DGKVOObserverBlock)(DGKVOBlocksObserver *observer, NSDictionary *change);
 
-@interface NSObject (DGKVOBlocks)
-
-- (id<DGKVOBlocksObserver>)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block;
-- (void)dgkvo_removeObserverWithIdentifier:(id<DGKVOBlocksObserver>)identifier;
-
-@end
-
-@protocol DGKVOBlocksObserver <NSObject>
+@interface DGKVOBlocksObserver : NSObject
 - (void)stopObserving;
++ (DGKVOBlocksObserver *)observerForObject:(id)object
+								   keyPath:(NSString *)keyPath
+								   options:(NSKeyValueObservingOptions)options
+									 queue:(NSOperationQueue *)queue
+								usingBlock:(DGKVOObserverBlock)block;
 @end
 
 

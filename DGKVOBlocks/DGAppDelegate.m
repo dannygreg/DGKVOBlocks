@@ -11,7 +11,7 @@
 
 @interface DGAppDelegate () {
 @private
-    id numberObserver;
+    DGKVOBlocksObserver *numberObserver;
 }
 
 - (NSUInteger)fibonacciNumber:(NSUInteger)aNumber;
@@ -35,14 +35,18 @@
 }
 
 - (void)dealloc {
-    [self dgkvo_removeObserverWithIdentifier:numberObserver];
+    [numberObserver stopObserving];
 }
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     
-	[self dgkvo_addObserverForKeyPath:@"string" options:NSKeyValueObservingOptionNew queue:nil usingBlock:^(id<DGKVOBlocksObserver> observer, NSDictionary *change) {
+	[DGKVOBlocksObserver observerForObject:self
+								   keyPath:@"string"
+								   options:NSKeyValueObservingOptionNew
+									 queue:nil
+								usingBlock:^(DGKVOBlocksObserver *observer, NSDictionary *change) {
 		
 		NSLog(@"%@", change);
 		
@@ -58,7 +62,11 @@
     
     // Use this with a nil queue to see the main thread blocking.
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    numberObserver = [self dgkvo_addObserverForKeyPath:@"number" options:NSKeyValueObservingOptionNew queue:queue usingBlock:^(id<DGKVOBlocksObserver> observer, NSDictionary *change) {
+    numberObserver = [DGKVOBlocksObserver observerForObject:self 
+													keyPath:@"number"
+													options:NSKeyValueObservingOptionNew
+													  queue:queue
+												 usingBlock:^(DGKVOBlocksObserver *observer, NSDictionary *change) {
         NSLog(@"%@", change);
         self.fibonacciField.integerValue = [self fibonacciNumber:number];
 	}];

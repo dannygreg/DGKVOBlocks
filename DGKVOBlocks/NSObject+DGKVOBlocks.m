@@ -40,7 +40,14 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 //***************************************************************************
 
-@interface DGKVOBlocksObserver : NSObject <DGKVOBlocksObserver>
+@interface NSObject (DGKVOBlocks)
+
+- (DGKVOBlocksObserver *)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block;
+- (void)dgkvo_removeObserverWithIdentifier:(DGKVOBlocksObserver *)identifier;
+
+@end
+
+@interface DGKVOBlocksObserver ()
 
 @property (copy) DGKVOObserverBlock block;
 @property (copy) NSString *keyPath;
@@ -75,6 +82,14 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 - (void)stopObserving {
 	[self.observingObject dgkvo_removeObserverWithIdentifier:self];
+}
+
++ (DGKVOBlocksObserver *)observerForObject:(id)object keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block {
+	
+	return [object dgkvo_addObserverForKeyPath:keyPath
+									   options:options
+										 queue:queue
+									usingBlock:block];
 }
 
 @end
@@ -113,7 +128,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 @implementation NSObject (DGKVOBlocks)
 
-- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
+- (DGKVOBlocksObserver *)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
 {
     if (block == nil)
         return nil;
@@ -137,7 +152,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
     return newBlocksObserver;
 }
 
-- (void)dgkvo_removeObserverWithIdentifier:(id)identifier
+- (void)dgkvo_removeObserverWithIdentifier:(DGKVOBlocksObserver *)identifier
 {
     //Now in ARC and GC just removing this reference should be enough to kill the observation
     [self removeObserver:identifier forKeyPath:[identifier keyPath]];
