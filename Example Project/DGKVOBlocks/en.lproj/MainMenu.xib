@@ -1422,7 +1422,7 @@
               <string key="NSReuseIdentifierKey">_NS:903</string>
               <bool key="NSEnabled">YES</bool>
               <object class="NSTextFieldCell" key="NSCell" id="204780850">
-                <int key="NSCellFlags">-1804468671</int>
+                <int key="NSCellFlags">-2072904127</int>
                 <int key="NSCellFlags2">272630784</int>
                 <string key="NSContents"/>
                 <reference key="NSSupport" ref="510799326"/>
@@ -4027,7 +4027,7 @@
       <integer value="1060" key="NS.object.0"/>
     </object>
     <bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-    <nil key="IBDocument.LastKnownRelativeProjectPath"/>
+    <string key="IBDocument.LastKnownRelativeProjectPath">..</string>
     <int key="IBDocument.defaultPropertyAccessControl">3</int>
     <dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
       <string key="NSMenuCheckmark">{9, 8}</string>
