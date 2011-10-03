@@ -54,6 +54,17 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 @synthesize keyPath = _keyPath;
 @synthesize queue = _queue;
 
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+    [_keyPath release];
+    [_queue release];
+    [_block release];
+    
+    [super dealloc];
+}
+#endif
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
     if (context == &DGKVOBlocksObservationContext) {
