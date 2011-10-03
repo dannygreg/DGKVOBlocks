@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const DGKVOBlocksObservationContext;
-
 typedef void (^DGKVOObserverBlock)(NSDictionary *change);
 
 @interface DGKVOBlocksObserver : NSObject
 
++ (id)observerWithQueue:(NSOperationQueue *)queue block:(DGKVOObserverBlock)block;
+
+@property (readonly) void *context;
 @property (readonly) NSOperationQueue *queue;
 @property (readonly) DGKVOObserverBlock block;
 

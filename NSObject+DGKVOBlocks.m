@@ -33,20 +33,21 @@
 static NSString *const DGKVOBlocksBlockObserversKey = @"DGKVOBlocksBlockObserversKey";
 static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
 
-@interface NSObject (DGKVOBlocksProperties)
+#if __has_feature(objc_arc)
+#define DGKVOBlocksBlockObserversKey ((__bridge const void *)DGKVOBlocksBlockObserversKey)
+#define DGKVOBlocksKeyPathKey ((__bridge const void *)DGKVOBlocksKeyPathKey)
+#endif
 
-@property (readonly) NSMutableSet *dgkvo_blockObservers;
+//***************************************************************************
 
-@end
-
-@implementation NSObject (DGKVOBlocksProperties) 
+@implementation NSObject (DGKVOBlocks)
 
 - (NSMutableSet *)dgkvo_blockObservers
 {
     @synchronized (self) {
         
         NSMutableSet *set = objc_getAssociatedObject(self, DGKVOBlocksBlockObserversKey);
-
+        
         if (set == nil) {
             set = [NSMutableArray array];
             objc_setAssociatedObject(self, DGKVOBlocksBlockObserversKey, set, OBJC_ASSOCIATION_RETAIN);
@@ -56,29 +57,19 @@ static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
     }
 }
 
-@end
-
-//***************************************************************************
-
-@implementation NSObject (DGKVOBlocks)
-
 - (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
 {
     NSAssert(block != nil, @"You cannot add a block observer without a block.");
     
-    DGKVOBlocksObserver *observer = [[DGKVOBlocksObserver alloc] initWithQueue:queue block:block];
+    DGKVOBlocksObserver *observer = [DGKVOBlocksObserver observerWithQueue:queue block:block];
 
     objc_setAssociatedObject(observer, DGKVOBlocksKeyPathKey, keyPath, OBJC_ASSOCIATION_COPY);
 
-    [self addObserver:observer forKeyPath:keyPath options:options context:DGKVOBlocksObservationContext];
-    
+    [self addObserver:observer forKeyPath:keyPath options:options context:observer.context];
+
     @synchronized (self.dgkvo_blockObservers) {
         [self.dgkvo_blockObservers addObject:observer];
     }
-    
-#if !__has_feature(objc_arc)
-    [observer release];
-#endif
     
     return observer;
 }
