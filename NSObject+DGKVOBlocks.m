@@ -49,7 +49,7 @@ static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
         NSMutableSet *set = objc_getAssociatedObject(self, DGKVOBlocksBlockObserversKey);
         
         if (set == nil) {
-            set = [NSMutableArray array];
+            set = [NSMutableSet set];
             objc_setAssociatedObject(self, DGKVOBlocksBlockObserversKey, set, OBJC_ASSOCIATION_RETAIN);
         }
         
