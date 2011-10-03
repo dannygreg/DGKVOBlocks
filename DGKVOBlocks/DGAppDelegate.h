@@ -8,11 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DGAppDelegate : NSObject <NSApplicationDelegate>
+@interface DGAppDelegate : NSObject <NSApplicationDelegate> {
+@private
+    id stringObserver;
+    id numberObserver;
+}
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, copy) NSString *string;
-@property (weak) IBOutlet NSTextField *fibonacciField;
+@property (assign) IBOutlet NSTextField *fibonacciField;
 @property (assign) NSUInteger number;
 
 @end
