@@ -39,6 +39,7 @@ static NSString *const DGKVOBlocksObservationContext = @"DGKVOBlocksObservationC
 + (id)observerWithQueue:(NSOperationQueue *)queue block:(DGKVOObserverBlock)block
 {
     id observer = [[self alloc] initWithQueue:queue block:block];
+
 #if !__has_feature(objc_arc)
     [observer autorelease];
 #endif
@@ -61,11 +62,12 @@ static NSString *const DGKVOBlocksObservationContext = @"DGKVOBlocksObservationC
     self = [super init];
     
     if (self) {
-#if __has_feature(objc_arc)
         _queue = queue;
-#else
-        _queue = [queue retain];
+
+#if !__has_feature(objc_arc)
+        [queue retain];
 #endif
+
         _block = [block copy];
     }
     
@@ -91,6 +93,7 @@ static NSString *const DGKVOBlocksObservationContext = @"DGKVOBlocksObservationC
 #if !__has_feature(objc_arc)
             [copiedChange release];
 #endif
+
         } else {
             self.block(change);
         }
