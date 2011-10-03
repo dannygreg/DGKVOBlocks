@@ -125,7 +125,7 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 - (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
 {
-    NSParameterAssert(block);
+    NSAssert(block != nil, @"You cannot add a block observer without a block.");
     
     DGKVOBlocksObserver *newBlocksObserver = [[DGKVOBlocksObserver alloc] init];
     newBlocksObserver.block = block;
