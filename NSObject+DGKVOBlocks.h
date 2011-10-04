@@ -30,7 +30,7 @@
 
 @interface NSObject (DGKVOBlocks)
 
-- (DGKVOBlocksObserver *)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block;
-- (void)dgkvo_removeObserver:(DGKVOBlocksObserver *)observer;
+- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block;
+- (void)dgkvo_removeObserver:(id)observer;
 
 @end

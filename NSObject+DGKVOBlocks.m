@@ -57,7 +57,7 @@ static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
     }
 }
 
-- (DGKVOBlocksObserver *)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
+- (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block
 {
     NSAssert(block != nil, @"You cannot add a block observer without a block.");
     
@@ -74,7 +74,7 @@ static NSString *const DGKVOBlocksKeyPathKey = @"DGKVOBlocksKeyPathKey";
     return observer;
 }
 
-- (void)dgkvo_removeObserver:(DGKVOBlocksObserver *)observer
+- (void)dgkvo_removeObserver:(id)observer
 {
     NSString *keyPath = objc_getAssociatedObject(observer, DGKVOBlocksKeyPathKey);
     [self removeObserver:observer forKeyPath:keyPath];
