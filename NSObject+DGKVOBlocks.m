@@ -40,7 +40,11 @@ NSString *const DGKVOBlocksObserversAssociatedObjectsKey = @"DGKVOBlocksObserver
 
 //***************************************************************************
 
-@interface DGKVOBlocksObserver : NSObject 
+@interface DGKVOBlocksObserver : NSObject {
+    DGKVOObserverBlock _block;
+    NSString *_keyPath;
+    NSOperationQueue *_queue;
+}
 
 @property (copy) DGKVOObserverBlock block;
 @property (copy) NSString *keyPath;
