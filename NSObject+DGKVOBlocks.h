@@ -32,5 +32,6 @@ typedef void (^DGKVOObserverBlock)(NSDictionary *change);
 
 - (id)dgkvo_addObserverForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options queue:(NSOperationQueue *)queue usingBlock:(DGKVOObserverBlock)block;
 - (void)dgkvo_removeObserverWithIdentifier:(id)identifier;
+- (void)dgkvo_removeAllObservers;
 
 @end
